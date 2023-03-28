@@ -11,8 +11,8 @@ project(nvdla VERSION 0.1 LANGUAGES CXX)
 # alias and configurations
 # ---------------------------------------------------------------------------- #
 set(CMAKE_CXX_COMPILER "g++-9")
-set(CMAKE_PREFIX_PATH /root/ILAng/build/NVDLA_SDP)
-# set(CMAKE_PREFIX_PATH /u/djacob/ILAng /u/djacob/z3)
+#set(CMAKE_PREFIX_PATH /root/ILAng/build/NVDLA_SDP)
+set(CMAKE_PREFIX_PATH /u/djacob/ILAng /u/djacob/z3)
 
 set(MyTarget ${PROJECT_NAME})
 
