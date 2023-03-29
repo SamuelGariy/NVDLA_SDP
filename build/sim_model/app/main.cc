@@ -379,12 +379,12 @@ int sc_main(int argc, char *argv[])
 {
 
   // Dummy ports
-  sc_signal<sc_biguint<32>> sdp_cacc_data_main[16];
-  sc_signal<sc_biguint<32>> sdp_mrdma_data_main[16];
-  sc_signal<sc_biguint<16>> sdp_regs_data_alu_main[16];
-  sc_signal<sc_biguint<16>> sdp_regs_data_mult_main[16];
-  sc_signal<sc_biguint<16>> sdp_dma_data_alu_main[16];
-  sc_signal<sc_biguint<16>> sdp_dma_data_mult_main[16];
+  // sc_signal<sc_biguint<32>> sdp_cacc_data_main[16];
+  // sc_signal<sc_biguint<32>> sdp_mrdma_data_main[16];
+  // sc_signal<sc_biguint<16>> sdp_regs_data_alu_main[16];
+  // sc_signal<sc_biguint<16>> sdp_regs_data_mult_main[16];
+  // sc_signal<sc_biguint<16>> sdp_dma_data_alu_main[16];
+  // sc_signal<sc_biguint<16>> sdp_dma_data_mult_main[16];
 
   sc_signal<sc_biguint<22>> sdp_csb_addr_main;
   sc_signal<sc_biguint<32>> sdp_csb_data_main;
@@ -408,15 +408,15 @@ int sc_main(int argc, char *argv[])
   testbench tb("tb");
 
   // Linking to dummy ports
-  for (size_t i = 0; i < 16; i++)
-  {
-    tb.sdp_cacc_data_signal[i](sdp_cacc_data_main[i]);
-    tb.sdp_mrdma_data_signal[i](sdp_mrdma_data_main[i]);
-    tb.sdp_regs_data_alu_signal[i](sdp_regs_data_alu_main[i]);
-    tb.sdp_regs_data_mult_signal[i](sdp_regs_data_mult_main[i]);
-    tb.sdp_dma_data_alu_signal[i](sdp_dma_data_alu_main[i]);
-    tb.sdp_dma_data_mult_signal[i](sdp_dma_data_mult_main[i]);
-  }
+  // for (size_t i = 0; i < 16; i++)
+  // {
+  //   tb.sdp_cacc_data_signal[i](sdp_cacc_data_main[i]);
+  //   tb.sdp_mrdma_data_signal[i](sdp_mrdma_data_main[i]);
+  //   tb.sdp_regs_data_alu_signal[i](sdp_regs_data_alu_main[i]);
+  //   tb.sdp_regs_data_mult_signal[i](sdp_regs_data_mult_main[i]);
+  //   tb.sdp_dma_data_alu_signal[i](sdp_dma_data_alu_main[i]);
+  //   tb.sdp_dma_data_mult_signal[i](sdp_dma_data_mult_main[i]);
+  // }
 
   tb.sdp_csb_addr_signal(sdp_csb_addr_main);
   tb.sdp_csb_data_signal(sdp_csb_data_main);
