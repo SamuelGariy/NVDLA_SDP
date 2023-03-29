@@ -316,22 +316,8 @@ SC_MODULE(testbench) {
     int instr_no = 0;
     while (input_done == 0)
     {
-      fout << "Instruction number " << std::dec << instr_no++ << std::endl;
-      fout << " NVDLA_SDP_S_PRODUCER => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_s_producer << std::endl;
-      fout << " NVDLA_SDP_D_OP_ENABLE => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_op_en << std::endl;
-      fout << " SDP_D_STATUS => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_unequal << std::endl;
-      fout << " SDP_D_STATUS_NAN_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_nan_input_num << std::endl;
-      fout << " SDP_D_STATUS_INF_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_inf_input_num << std::endl;
-      fout << " SDP_D_STATUS_NAN_OUTPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_nan_output_num << std::endl;
-      fout << " SDP_D_PERF_WDMA_WRITE_STALL => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_wdma_stall << std::endl;
-      fout << " SDP_D_PERF_LUT_UFLOW => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_uflow << std::endl;
-      fout << " SDP_D_PERF_LUT_OFLOW => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_oflow << std::endl;
-      fout << " SDP_D_PERF_OUT_SATURATION => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_out_saturation << std::endl;
-      fout << " SDP_D_PERF_LUT_HYBRID => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_hybrid << std::endl;
-      fout << " SDP_D_PERF_LUT_LE_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_le_hit << std::endl;
-      fout << " SDP_D_PERF_LUT_LO_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_lo_hit << std::endl;
+      instr_no++;
       wait(10, SC_NS);
-        fout << std::endl;
     }
 
     wait(1000, SC_NS);
