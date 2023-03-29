@@ -1256,7 +1256,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_unset);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
         }
 
         { // 00e8_group1
@@ -1265,7 +1265,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_unset);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
         }
 
         // NVDLA_SDP_D_PERF_OUT_SATURATION
