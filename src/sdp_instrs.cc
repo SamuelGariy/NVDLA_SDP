@@ -1100,6 +1100,84 @@ void DefineSDPInstrs(Ila& m) {
                         Extract(m.input("csb_data"), 5, 0));
     }
 
+    // SDP_D_STATUS
+    {  // 00cc_group0
+        auto instr = m.NewInstr("D_STATUS_group0");
+        instr.SetDecode((csb_addr == 0xb0cc) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
+    }
+
+   {  // 00cc_group1
+        auto instr = m.NewInstr("D_STATUS_group1");
+        instr.SetDecode((csb_addr == 0xb0cc) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
+    }
+    
+    // SDP_D_STATUS_NAN_INPUT_NUM
+    {  // 00d0_group0
+        auto instr = m.NewInstr("D_STATUS_NAN_INPUT_NUM_group0");
+        instr.SetDecode((csb_addr == 0xb0d0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
+    }
+
+   {  // 00do_group1
+        auto instr = m.NewInstr("D_STATUS_NAN_INPUT_NUM_group1");
+        instr.SetDecode((csb_addr == 0xb0d0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
+    }
+
+    // SDP_D_STATUS_INF_INPUT_NUM
+      {  // 00d4_group0
+        auto instr = m.NewInstr("D_STATUS_INF_INPUT_NUM_group0");
+        instr.SetDecode((csb_addr == 0xb0d4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
+    }
+
+   {  // 00d4_group1
+        auto instr = m.NewInstr("D_STATUS_INF_INPUT_NUM_group1");
+        instr.SetDecode((csb_addr == 0xb0d4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
+    }
+
+
+     // NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM
+      {  // 00d8_group0
+        auto instr = m.NewInstr("D_STATUS_NAN_OUTPUT_NUM_group0");
+        instr.SetDecode((csb_addr == 0xb0d8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
+    }
+
+   {  // 00d8_group1
+        auto instr = m.NewInstr("D_STATUS_NAN_OUTPUT_NUM_group1");
+        instr.SetDecode((csb_addr == 0xb0d8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
+    }
+
+   
     // PERF ENABLE
     {  // 00dc_group0
         auto instr = m.NewInstr("PERF_ENABLE_group0");
@@ -1132,6 +1210,140 @@ void DefineSDPInstrs(Ila& m) {
         instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_DMA_EN)),
                         SelectBit(m.input("csb_data"), 0));
     }
+
+     // NVDLA_SDP_D_PERF_WDMA_WRITE_STALL
+      {  // 00e0_group0
+        auto instr = m.NewInstr("D_PERF_WDMA_WRITE_STALL_group0");
+        instr.SetDecode((csb_addr == 0xb0e0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
+    }
+
+   {  // 00e0_group1
+        auto instr = m.NewInstr("D_PERF_WDMA_WRITE_STALL_group1");
+        instr.SetDecode((csb_addr == 0xb0e0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
+    }
+
+    // NVDLA_SDP_D_PERF_LUT_UFLOW
+      {  // 00e4_group0
+        auto instr = m.NewInstr("D_PERF_LUT_UFLOW_group0");
+        instr.SetDecode((csb_addr == 0xb0e4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_UFLOW_WIDTH, 0));
+    }
+
+   {  // 00e4_group1
+        auto instr = m.NewInstr("D_PERF_LUT_UFLOW_group1");
+        instr.SetDecode((csb_addr == 0xb0e4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_UFLOW_WIDTH, 0));
+    }
+
+     // NVDLA_SDP_D_PERF_LUT_OFLOW
+      {  // 00e8_group0
+        auto instr = m.NewInstr("D_PERF_LUT_OFLOW_group0");
+        instr.SetDecode((csb_addr == 0xb0e8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+    }
+
+   {  // 00e8_group1
+        auto instr = m.NewInstr("D_PERF_LUT_OFLOW_group1");
+        instr.SetDecode((csb_addr == 0xb0e8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+    }
+
+     // NVDLA_SDP_D_PERF_OUT_SATURATION
+      {  // 00ec_group0
+        auto instr = m.NewInstr("D_PERF_OUT_SATURATION_group0");
+        instr.SetDecode((csb_addr == 0xb0ec) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
+    }
+
+   {  // 00ec_group1
+        auto instr = m.NewInstr("D_PERF_OUT_SATURATION_group1");
+        instr.SetDecode((csb_addr == 0xb0ec) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
+    }
+
+     // NVDLA_SDP_D_PERF_LUT_HYBRID
+      {  // 00f0_group0
+        auto instr = m.NewInstr("D_PERF_LUT_HYBRID_group0");
+        instr.SetDecode((csb_addr == 0xb0f0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
+    }
+
+   {  // 00f0_group1
+        auto instr = m.NewInstr("D_PERF_LUT_HYBRID_group1");
+        instr.SetDecode((csb_addr == 0xb0f0) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
+    }
+
+      // NVDLA_SDP_D_PERF_LUT_LE_HIT
+      {  // 00f4_group0
+        auto instr = m.NewInstr("D_PERF_LUT_LE_HIT_group0");
+        instr.SetDecode((csb_addr == 0xb0f4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
+    }
+
+   {  // 00f4_group1
+        auto instr = m.NewInstr("D_PERF_LUT_LE_HIT_group1");
+        instr.SetDecode((csb_addr == 0xb0f4) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
+    }
+
+   // NVDLA_SDP_D_PERF_LUT_LO_HIT
+      {  // 00f8_group0
+        auto instr = m.NewInstr("D_PERF_LUT_LO_HIT_group0");
+        instr.SetDecode((csb_addr == 0xb0f8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group0_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
+    }
+
+   {  // 00f8_group1
+        auto instr = m.NewInstr("D_PERF_LUT_LO_HIT_group1");
+        instr.SetDecode((csb_addr == 0xb0f8) & csb_valid & csb_write &
+                        (producer == BvConst(0, 1)) & group1_unset);
+
+        instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
+                        Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
+    }
+
 
     // Receive DONE interrupt
     // - Need to somehow reset all registers associated with previous group

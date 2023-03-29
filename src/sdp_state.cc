@@ -41,8 +41,8 @@ void DefineSDPState(Ila& m) {
     // Config Registers
 
     // b000 done
-    m.NewBvState(NVDLA_SDP_S_STATUS_0, NVDLA_SDP_S_STATUS_WIDTH);
-    m.NewBvState(NVDLA_SDP_S_STATUS_1, NVDLA_SDP_S_STATUS_WIDTH);
+    m.NewBvState(NVDLA_SDP_S_STATUS_0, NVDLA_SDP_S_STATUS_WIDTH); //read only
+    m.NewBvState(NVDLA_SDP_S_STATUS_1, NVDLA_SDP_S_STATUS_WIDTH); // read only
 
     // b004 done
     m.NewBvState(NVDLA_SDP_S_PRODUCER, NVDLA_SDP_S_PRODUCER_WIDTH);
