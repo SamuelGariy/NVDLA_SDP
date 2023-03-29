@@ -115,6 +115,7 @@ SC_MODULE(Source) {
       sdp_fifo_clr = cmd_seq["program fragment"][i]["fifo_clr"].get<int>();
       sdp_done = cmd_seq["program fragment"][i]["done"].get<int>();
       wait(10, SC_NS);
+      std::cout << "iteration? " << i << std::endl;
     }
     input_done = 1;
   }
