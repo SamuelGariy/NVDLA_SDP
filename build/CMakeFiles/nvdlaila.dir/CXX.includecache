@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/sdp_config.h
+
+/root/ILAng/build/NVDLA_SDP/src/sdp_instrs.cc
+ilang/ilang++.h
+-
+sdp_config.h
+-
+
