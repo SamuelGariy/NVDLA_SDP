@@ -42,12 +42,12 @@ SC_MODULE(Source)
 {
   sc_in<bool> clk{"clk"};
 
-  sc_out<sc_biguint<32>> sdp_cacc_data[16];
-  sc_out<sc_biguint<32>> sdp_mrdma_data[16];
-  sc_out<sc_biguint<16>> sdp_regs_data_alu[16];
-  sc_out<sc_biguint<16>> sdp_regs_data_mult[16];
-  sc_out<sc_biguint<16>> sdp_dma_data_alu[16];
-  sc_out<sc_biguint<16>> sdp_dma_data_mult[16];
+  // sc_out<sc_biguint<32>> sdp_cacc_data[16];
+  // sc_out<sc_biguint<32>> sdp_mrdma_data[16];
+  // sc_out<sc_biguint<16>> sdp_regs_data_alu[16];
+  // sc_out<sc_biguint<16>> sdp_regs_data_mult[16];
+  // sc_out<sc_biguint<16>> sdp_dma_data_alu[16];
+  // sc_out<sc_biguint<16>> sdp_dma_data_mult[16];
 
   sc_out<sc_biguint<22>> sdp_csb_addr;
   sc_out<sc_biguint<32>> sdp_csb_data;
@@ -134,12 +134,12 @@ SC_MODULE(testbench)
   Source src;
 
   sc_clock clk;
-  sc_out<sc_biguint<32>> sdp_cacc_data_signal[16];
-  sc_out<sc_biguint<32>> sdp_mrdma_data_signal[16];
-  sc_out<sc_biguint<16>> sdp_regs_data_alu_signal[16];
-  sc_out<sc_biguint<16>> sdp_regs_data_mult_signal[16];
-  sc_out<sc_biguint<16>> sdp_dma_data_alu_signal[16];
-  sc_out<sc_biguint<16>> sdp_dma_data_mult_signal[16];
+  // sc_out<sc_biguint<32>> sdp_cacc_data_signal[16];
+  // sc_out<sc_biguint<32>> sdp_mrdma_data_signal[16];
+  // sc_out<sc_biguint<16>> sdp_regs_data_alu_signal[16];
+  // sc_out<sc_biguint<16>> sdp_regs_data_mult_signal[16];
+  // sc_out<sc_biguint<16>> sdp_dma_data_alu_signal[16];
+  // sc_out<sc_biguint<16>> sdp_dma_data_mult_signal[16];
 
   sc_out<sc_biguint<22>> sdp_csb_addr_signal{"sdp_csb_addr_signal"};
   sc_out<sc_biguint<32>> sdp_csb_data_signal{"sdp_csb_data_signal"};
