@@ -390,7 +390,7 @@ int sc_main(int argc, char* argv[]) {
   std::string file_name;
   file_name = argv[1];
   prog_frag_path = "../prog_frag/" + file_name + "_input.json";
-  output_path = "../result/" + file_name + "_out.json";
+  output_path = "../result/" + file_name + "_out.out";
   std::cout << "executing " << file_name << std::endl;
 
   // Begin simulation
