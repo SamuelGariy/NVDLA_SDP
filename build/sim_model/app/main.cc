@@ -42,12 +42,12 @@ SC_MODULE(Source)
 {
   sc_in<bool> clk{"clk"};
 
-  // sc_out<sc_biguint<32>> sdp_cacc_data[16];
-  // sc_out<sc_biguint<32>> sdp_mrdma_data[16];
-  // sc_out<sc_biguint<16>> sdp_regs_data_alu[16];
-  // sc_out<sc_biguint<16>> sdp_regs_data_mult[16];
-  // sc_out<sc_biguint<16>> sdp_dma_data_alu[16];
-  // sc_out<sc_biguint<16>> sdp_dma_data_mult[16];
+  sc_out<sc_biguint<32>> sdp_cacc_data[16];
+  sc_out<sc_biguint<32>> sdp_mrdma_data[16];
+  sc_out<sc_biguint<16>> sdp_regs_data_alu[16];
+  sc_out<sc_biguint<16>> sdp_regs_data_mult[16];
+  sc_out<sc_biguint<16>> sdp_dma_data_alu[16];
+  sc_out<sc_biguint<16>> sdp_dma_data_mult[16];
 
   sc_out<sc_biguint<22>> sdp_csb_addr;
   sc_out<sc_biguint<32>> sdp_csb_data;
@@ -70,12 +70,12 @@ SC_MODULE(Source)
   void source_input()
   {
     // Reset the ports
-    // std::fill(sdp_cacc_data, sdp_cacc_data + 16, 0);
-    // std::fill(sdp_mrdma_data, sdp_mrdma_data + 16, 0);
-    // std::fill(sdp_regs_data_alu, sdp_regs_data_alu + 16, 0);
-    // std::fill(sdp_regs_data_mult, sdp_regs_data_mult + 16, 0);
-    // std::fill(sdp_dma_data_alu, sdp_dma_data_alu + 16, 0);
-    // std::fill(sdp_dma_data_mult, sdp_dma_data_mult + 16, 0);
+    std::fill(sdp_cacc_data, sdp_cacc_data + 16, 0);
+    std::fill(sdp_mrdma_data, sdp_mrdma_data + 16, 0);
+    std::fill(sdp_regs_data_alu, sdp_regs_data_alu + 16, 0);
+    std::fill(sdp_regs_data_mult, sdp_regs_data_mult + 16, 0);
+    std::fill(sdp_dma_data_alu, sdp_dma_data_alu + 16, 0);
+    std::fill(sdp_dma_data_mult, sdp_dma_data_mult + 16, 0);
 
     sdp_csb_addr = 0;
     sdp_csb_data = 0;
@@ -100,15 +100,15 @@ SC_MODULE(Source)
     // Pass the command to the ports
     for (size_t i = 0; i < cmd_seq["program fragment"].size(); i++)
     {
-      // for (size_t j = 0; j < 16; j++)
-      // {
-      //   sdp_cacc_data[j] = cmd_seq["program fragment"][i]["cacc_data_" + std::to_string(j)].get<int>();
-      //   sdp_mrdma_data[j] = cmd_seq["program fragment"][i]["mrdma_data_" + std::to_string(j)].get<int>();
-      //   sdp_regs_data_alu[j] = cmd_seq["program fragment"][i]["regs_data_alu_" + std::to_string(j)].get<int>();
-      //   sdp_regs_data_mult[j] = cmd_seq["program fragment"][i]["regs_data_mult_" + std::to_string(j)].get<int>();
-      //   sdp_dma_data_alu[j] = cmd_seq["program fragment"][i]["dma_data_alu_" + std::to_string(j)].get<int>();
-      //   sdp_dma_data_mult[j] = cmd_seq["program fragment"][i]["dma_data_mult_" + std::to_string(j)].get<int>();
-      // }
+      for (size_t j = 0; j < 16; j++)
+      {
+        sdp_cacc_data[j] = cmd_seq["program fragment"][i]["cacc_data_" + std::to_string(j)].get<int>();
+        sdp_mrdma_data[j] = cmd_seq["program fragment"][i]["mrdma_data_" + std::to_string(j)].get<int>();
+        sdp_regs_data_alu[j] = cmd_seq["program fragment"][i]["regs_data_alu_" + std::to_string(j)].get<int>();
+        sdp_regs_data_mult[j] = cmd_seq["program fragment"][i]["regs_data_mult_" + std::to_string(j)].get<int>();
+        sdp_dma_data_alu[j] = cmd_seq["program fragment"][i]["dma_data_alu_" + std::to_string(j)].get<int>();
+        sdp_dma_data_mult[j] = cmd_seq["program fragment"][i]["dma_data_mult_" + std::to_string(j)].get<int>();
+      }
 
       sdp_csb_addr = std::stoi((cmd_seq["program fragment"][i]["csb_addr"].get<std::string>()).c_str(), nullptr, 16);
 
@@ -134,12 +134,12 @@ SC_MODULE(testbench)
   Source src;
 
   sc_clock clk;
-  // sc_out<sc_biguint<32>> sdp_cacc_data_signal[16];
-  // sc_out<sc_biguint<32>> sdp_mrdma_data_signal[16];
-  // sc_out<sc_biguint<16>> sdp_regs_data_alu_signal[16];
-  // sc_out<sc_biguint<16>> sdp_regs_data_mult_signal[16];
-  // sc_out<sc_biguint<16>> sdp_dma_data_alu_signal[16];
-  // sc_out<sc_biguint<16>> sdp_dma_data_mult_signal[16];
+  sc_out<sc_biguint<32>> sdp_cacc_data_signal[16];
+  sc_out<sc_biguint<32>> sdp_mrdma_data_signal[16];
+  sc_out<sc_biguint<16>> sdp_regs_data_alu_signal[16];
+  sc_out<sc_biguint<16>> sdp_regs_data_mult_signal[16];
+  sc_out<sc_biguint<16>> sdp_dma_data_alu_signal[16];
+  sc_out<sc_biguint<16>> sdp_dma_data_mult_signal[16];
 
   sc_out<sc_biguint<22>> sdp_csb_addr_signal{"sdp_csb_addr_signal"};
   sc_out<sc_biguint<32>> sdp_csb_data_signal{"sdp_csb_data_signal"};
@@ -160,15 +160,15 @@ SC_MODULE(testbench)
     // Read in signals from the prog_frag file
     src.clk(clk);
 
-    // for (size_t i = 0; i < 16; i++)
-    // {
-    //   src.sdp_cacc_data[i](sdp_cacc_data_signal[i]);
-    //   src.sdp_mrdma_data[i](sdp_mrdma_data_signal[i]);
-    //   src.sdp_regs_data_alu[i](sdp_regs_data_alu_signal[i]);
-    //   src.sdp_regs_data_mult[i](sdp_regs_data_mult_signal[i]);
-    //   src.sdp_dma_data_alu[i](sdp_dma_data_alu_signal[i]);
-    //   src.sdp_dma_data_mult[i](sdp_dma_data_mult_signal[i]);
-    // }
+    for (size_t i = 0; i < 16; i++)
+    {
+      src.sdp_cacc_data[i](sdp_cacc_data_signal[i]);
+      src.sdp_mrdma_data[i](sdp_mrdma_data_signal[i]);
+      src.sdp_regs_data_alu[i](sdp_regs_data_alu_signal[i]);
+      src.sdp_regs_data_mult[i](sdp_regs_data_mult_signal[i]);
+      src.sdp_dma_data_alu[i](sdp_dma_data_alu_signal[i]);
+      src.sdp_dma_data_mult[i](sdp_dma_data_mult_signal[i]);
+    }
 
     src.sdp_csb_addr(sdp_csb_addr_signal);
     src.sdp_csb_data(sdp_csb_data_signal);
@@ -183,113 +183,113 @@ SC_MODULE(testbench)
 
     // Link with the sdp.h SystemC model
 
-    // // All CACC input signals
-    // sdp_inst.sdp_cacc_data_0_in(sdp_cacc_data_signal[0]);
-    // sdp_inst.sdp_cacc_data_1_in(sdp_cacc_data_signal[1]);
-    // sdp_inst.sdp_cacc_data_2_in(sdp_cacc_data_signal[2]);
-    // sdp_inst.sdp_cacc_data_3_in(sdp_cacc_data_signal[3]);
-    // sdp_inst.sdp_cacc_data_4_in(sdp_cacc_data_signal[4]);
-    // sdp_inst.sdp_cacc_data_5_in(sdp_cacc_data_signal[5]);
-    // sdp_inst.sdp_cacc_data_6_in(sdp_cacc_data_signal[6]);
-    // sdp_inst.sdp_cacc_data_7_in(sdp_cacc_data_signal[7]);
-    // sdp_inst.sdp_cacc_data_8_in(sdp_cacc_data_signal[8]);
-    // sdp_inst.sdp_cacc_data_9_in(sdp_cacc_data_signal[9]);
-    // sdp_inst.sdp_cacc_data_10_in(sdp_cacc_data_signal[10]);
-    // sdp_inst.sdp_cacc_data_11_in(sdp_cacc_data_signal[11]);
-    // sdp_inst.sdp_cacc_data_12_in(sdp_cacc_data_signal[12]);
-    // sdp_inst.sdp_cacc_data_13_in(sdp_cacc_data_signal[13]);
-    // sdp_inst.sdp_cacc_data_14_in(sdp_cacc_data_signal[14]);
-    // sdp_inst.sdp_cacc_data_15_in(sdp_cacc_data_signal[15]);
+    // All CACC input signals
+    sdp_inst.sdp_cacc_data_0_in(sdp_cacc_data_signal[0]);
+    sdp_inst.sdp_cacc_data_1_in(sdp_cacc_data_signal[1]);
+    sdp_inst.sdp_cacc_data_2_in(sdp_cacc_data_signal[2]);
+    sdp_inst.sdp_cacc_data_3_in(sdp_cacc_data_signal[3]);
+    sdp_inst.sdp_cacc_data_4_in(sdp_cacc_data_signal[4]);
+    sdp_inst.sdp_cacc_data_5_in(sdp_cacc_data_signal[5]);
+    sdp_inst.sdp_cacc_data_6_in(sdp_cacc_data_signal[6]);
+    sdp_inst.sdp_cacc_data_7_in(sdp_cacc_data_signal[7]);
+    sdp_inst.sdp_cacc_data_8_in(sdp_cacc_data_signal[8]);
+    sdp_inst.sdp_cacc_data_9_in(sdp_cacc_data_signal[9]);
+    sdp_inst.sdp_cacc_data_10_in(sdp_cacc_data_signal[10]);
+    sdp_inst.sdp_cacc_data_11_in(sdp_cacc_data_signal[11]);
+    sdp_inst.sdp_cacc_data_12_in(sdp_cacc_data_signal[12]);
+    sdp_inst.sdp_cacc_data_13_in(sdp_cacc_data_signal[13]);
+    sdp_inst.sdp_cacc_data_14_in(sdp_cacc_data_signal[14]);
+    sdp_inst.sdp_cacc_data_15_in(sdp_cacc_data_signal[15]);
 
-    // // All MRDMA input signals
-    // sdp_inst.sdp_mrdma_data_0_in(sdp_mrdma_data_signal[0]);
-    // sdp_inst.sdp_mrdma_data_1_in(sdp_mrdma_data_signal[1]);
-    // sdp_inst.sdp_mrdma_data_2_in(sdp_mrdma_data_signal[2]);
-    // sdp_inst.sdp_mrdma_data_3_in(sdp_mrdma_data_signal[3]);
-    // sdp_inst.sdp_mrdma_data_4_in(sdp_mrdma_data_signal[4]);
-    // sdp_inst.sdp_mrdma_data_5_in(sdp_mrdma_data_signal[5]);
-    // sdp_inst.sdp_mrdma_data_6_in(sdp_mrdma_data_signal[6]);
-    // sdp_inst.sdp_mrdma_data_7_in(sdp_mrdma_data_signal[7]);
-    // sdp_inst.sdp_mrdma_data_8_in(sdp_mrdma_data_signal[8]);
-    // sdp_inst.sdp_mrdma_data_9_in(sdp_mrdma_data_signal[9]);
-    // sdp_inst.sdp_mrdma_data_10_in(sdp_mrdma_data_signal[10]);
-    // sdp_inst.sdp_mrdma_data_11_in(sdp_mrdma_data_signal[11]);
-    // sdp_inst.sdp_mrdma_data_12_in(sdp_mrdma_data_signal[12]);
-    // sdp_inst.sdp_mrdma_data_13_in(sdp_mrdma_data_signal[13]);
-    // sdp_inst.sdp_mrdma_data_14_in(sdp_mrdma_data_signal[14]);
-    // sdp_inst.sdp_mrdma_data_15_in(sdp_mrdma_data_signal[15]);
+    // All MRDMA input signals
+    sdp_inst.sdp_mrdma_data_0_in(sdp_mrdma_data_signal[0]);
+    sdp_inst.sdp_mrdma_data_1_in(sdp_mrdma_data_signal[1]);
+    sdp_inst.sdp_mrdma_data_2_in(sdp_mrdma_data_signal[2]);
+    sdp_inst.sdp_mrdma_data_3_in(sdp_mrdma_data_signal[3]);
+    sdp_inst.sdp_mrdma_data_4_in(sdp_mrdma_data_signal[4]);
+    sdp_inst.sdp_mrdma_data_5_in(sdp_mrdma_data_signal[5]);
+    sdp_inst.sdp_mrdma_data_6_in(sdp_mrdma_data_signal[6]);
+    sdp_inst.sdp_mrdma_data_7_in(sdp_mrdma_data_signal[7]);
+    sdp_inst.sdp_mrdma_data_8_in(sdp_mrdma_data_signal[8]);
+    sdp_inst.sdp_mrdma_data_9_in(sdp_mrdma_data_signal[9]);
+    sdp_inst.sdp_mrdma_data_10_in(sdp_mrdma_data_signal[10]);
+    sdp_inst.sdp_mrdma_data_11_in(sdp_mrdma_data_signal[11]);
+    sdp_inst.sdp_mrdma_data_12_in(sdp_mrdma_data_signal[12]);
+    sdp_inst.sdp_mrdma_data_13_in(sdp_mrdma_data_signal[13]);
+    sdp_inst.sdp_mrdma_data_14_in(sdp_mrdma_data_signal[14]);
+    sdp_inst.sdp_mrdma_data_15_in(sdp_mrdma_data_signal[15]);
 
-    // // All regs ALU input signals
-    // sdp_inst.sdp_regs_data_alu_0_in(sdp_regs_data_alu_signal[0]);
-    // sdp_inst.sdp_regs_data_alu_1_in(sdp_regs_data_alu_signal[1]);
-    // sdp_inst.sdp_regs_data_alu_2_in(sdp_regs_data_alu_signal[2]);
-    // sdp_inst.sdp_regs_data_alu_3_in(sdp_regs_data_alu_signal[3]);
-    // sdp_inst.sdp_regs_data_alu_4_in(sdp_regs_data_alu_signal[4]);
-    // sdp_inst.sdp_regs_data_alu_5_in(sdp_regs_data_alu_signal[5]);
-    // sdp_inst.sdp_regs_data_alu_6_in(sdp_regs_data_alu_signal[6]);
-    // sdp_inst.sdp_regs_data_alu_7_in(sdp_regs_data_alu_signal[7]);
-    // sdp_inst.sdp_regs_data_alu_8_in(sdp_regs_data_alu_signal[8]);
-    // sdp_inst.sdp_regs_data_alu_9_in(sdp_regs_data_alu_signal[9]);
-    // sdp_inst.sdp_regs_data_alu_10_in(sdp_regs_data_alu_signal[10]);
-    // sdp_inst.sdp_regs_data_alu_11_in(sdp_regs_data_alu_signal[11]);
-    // sdp_inst.sdp_regs_data_alu_12_in(sdp_regs_data_alu_signal[12]);
-    // sdp_inst.sdp_regs_data_alu_13_in(sdp_regs_data_alu_signal[13]);
-    // sdp_inst.sdp_regs_data_alu_14_in(sdp_regs_data_alu_signal[14]);
-    // sdp_inst.sdp_regs_data_alu_15_in(sdp_regs_data_alu_signal[15]);
+    // All regs ALU input signals
+    sdp_inst.sdp_regs_data_alu_0_in(sdp_regs_data_alu_signal[0]);
+    sdp_inst.sdp_regs_data_alu_1_in(sdp_regs_data_alu_signal[1]);
+    sdp_inst.sdp_regs_data_alu_2_in(sdp_regs_data_alu_signal[2]);
+    sdp_inst.sdp_regs_data_alu_3_in(sdp_regs_data_alu_signal[3]);
+    sdp_inst.sdp_regs_data_alu_4_in(sdp_regs_data_alu_signal[4]);
+    sdp_inst.sdp_regs_data_alu_5_in(sdp_regs_data_alu_signal[5]);
+    sdp_inst.sdp_regs_data_alu_6_in(sdp_regs_data_alu_signal[6]);
+    sdp_inst.sdp_regs_data_alu_7_in(sdp_regs_data_alu_signal[7]);
+    sdp_inst.sdp_regs_data_alu_8_in(sdp_regs_data_alu_signal[8]);
+    sdp_inst.sdp_regs_data_alu_9_in(sdp_regs_data_alu_signal[9]);
+    sdp_inst.sdp_regs_data_alu_10_in(sdp_regs_data_alu_signal[10]);
+    sdp_inst.sdp_regs_data_alu_11_in(sdp_regs_data_alu_signal[11]);
+    sdp_inst.sdp_regs_data_alu_12_in(sdp_regs_data_alu_signal[12]);
+    sdp_inst.sdp_regs_data_alu_13_in(sdp_regs_data_alu_signal[13]);
+    sdp_inst.sdp_regs_data_alu_14_in(sdp_regs_data_alu_signal[14]);
+    sdp_inst.sdp_regs_data_alu_15_in(sdp_regs_data_alu_signal[15]);
 
-    // // All regs mult input signals
-    // sdp_inst.sdp_regs_data_mult_0_in(sdp_regs_data_mult_signal[0]);
-    // sdp_inst.sdp_regs_data_mult_1_in(sdp_regs_data_mult_signal[1]);
-    // sdp_inst.sdp_regs_data_mult_2_in(sdp_regs_data_mult_signal[2]);
-    // sdp_inst.sdp_regs_data_mult_3_in(sdp_regs_data_mult_signal[3]);
-    // sdp_inst.sdp_regs_data_mult_4_in(sdp_regs_data_mult_signal[4]);
-    // sdp_inst.sdp_regs_data_mult_5_in(sdp_regs_data_mult_signal[5]);
-    // sdp_inst.sdp_regs_data_mult_6_in(sdp_regs_data_mult_signal[6]);
-    // sdp_inst.sdp_regs_data_mult_7_in(sdp_regs_data_mult_signal[7]);
-    // sdp_inst.sdp_regs_data_mult_8_in(sdp_regs_data_mult_signal[8]);
-    // sdp_inst.sdp_regs_data_mult_9_in(sdp_regs_data_mult_signal[9]);
-    // sdp_inst.sdp_regs_data_mult_10_in(sdp_regs_data_mult_signal[10]);
-    // sdp_inst.sdp_regs_data_mult_11_in(sdp_regs_data_mult_signal[11]);
-    // sdp_inst.sdp_regs_data_mult_12_in(sdp_regs_data_mult_signal[12]);
-    // sdp_inst.sdp_regs_data_mult_13_in(sdp_regs_data_mult_signal[13]);
-    // sdp_inst.sdp_regs_data_mult_14_in(sdp_regs_data_mult_signal[14]);
-    // sdp_inst.sdp_regs_data_mult_15_in(sdp_regs_data_mult_signal[15]);
+    // All regs mult input signals
+    sdp_inst.sdp_regs_data_mult_0_in(sdp_regs_data_mult_signal[0]);
+    sdp_inst.sdp_regs_data_mult_1_in(sdp_regs_data_mult_signal[1]);
+    sdp_inst.sdp_regs_data_mult_2_in(sdp_regs_data_mult_signal[2]);
+    sdp_inst.sdp_regs_data_mult_3_in(sdp_regs_data_mult_signal[3]);
+    sdp_inst.sdp_regs_data_mult_4_in(sdp_regs_data_mult_signal[4]);
+    sdp_inst.sdp_regs_data_mult_5_in(sdp_regs_data_mult_signal[5]);
+    sdp_inst.sdp_regs_data_mult_6_in(sdp_regs_data_mult_signal[6]);
+    sdp_inst.sdp_regs_data_mult_7_in(sdp_regs_data_mult_signal[7]);
+    sdp_inst.sdp_regs_data_mult_8_in(sdp_regs_data_mult_signal[8]);
+    sdp_inst.sdp_regs_data_mult_9_in(sdp_regs_data_mult_signal[9]);
+    sdp_inst.sdp_regs_data_mult_10_in(sdp_regs_data_mult_signal[10]);
+    sdp_inst.sdp_regs_data_mult_11_in(sdp_regs_data_mult_signal[11]);
+    sdp_inst.sdp_regs_data_mult_12_in(sdp_regs_data_mult_signal[12]);
+    sdp_inst.sdp_regs_data_mult_13_in(sdp_regs_data_mult_signal[13]);
+    sdp_inst.sdp_regs_data_mult_14_in(sdp_regs_data_mult_signal[14]);
+    sdp_inst.sdp_regs_data_mult_15_in(sdp_regs_data_mult_signal[15]);
 
-    // // All DMA ALU input signals
-    // sdp_inst.sdp_dma_data_alu_0_in(sdp_dma_data_alu_signal[0]);
-    // sdp_inst.sdp_dma_data_alu_1_in(sdp_dma_data_alu_signal[1]);
-    // sdp_inst.sdp_dma_data_alu_2_in(sdp_dma_data_alu_signal[2]);
-    // sdp_inst.sdp_dma_data_alu_3_in(sdp_dma_data_alu_signal[3]);
-    // sdp_inst.sdp_dma_data_alu_4_in(sdp_dma_data_alu_signal[4]);
-    // sdp_inst.sdp_dma_data_alu_5_in(sdp_dma_data_alu_signal[5]);
-    // sdp_inst.sdp_dma_data_alu_6_in(sdp_dma_data_alu_signal[6]);
-    // sdp_inst.sdp_dma_data_alu_7_in(sdp_dma_data_alu_signal[7]);
-    // sdp_inst.sdp_dma_data_alu_8_in(sdp_dma_data_alu_signal[8]);
-    // sdp_inst.sdp_dma_data_alu_9_in(sdp_dma_data_alu_signal[9]);
-    // sdp_inst.sdp_dma_data_alu_10_in(sdp_dma_data_alu_signal[10]);
-    // sdp_inst.sdp_dma_data_alu_11_in(sdp_dma_data_alu_signal[11]);
-    // sdp_inst.sdp_dma_data_alu_12_in(sdp_dma_data_alu_signal[12]);
-    // sdp_inst.sdp_dma_data_alu_13_in(sdp_dma_data_alu_signal[13]);
-    // sdp_inst.sdp_dma_data_alu_14_in(sdp_dma_data_alu_signal[14]);
-    // sdp_inst.sdp_dma_data_alu_15_in(sdp_dma_data_alu_signal[15]);
+    // All DMA ALU input signals
+    sdp_inst.sdp_dma_data_alu_0_in(sdp_dma_data_alu_signal[0]);
+    sdp_inst.sdp_dma_data_alu_1_in(sdp_dma_data_alu_signal[1]);
+    sdp_inst.sdp_dma_data_alu_2_in(sdp_dma_data_alu_signal[2]);
+    sdp_inst.sdp_dma_data_alu_3_in(sdp_dma_data_alu_signal[3]);
+    sdp_inst.sdp_dma_data_alu_4_in(sdp_dma_data_alu_signal[4]);
+    sdp_inst.sdp_dma_data_alu_5_in(sdp_dma_data_alu_signal[5]);
+    sdp_inst.sdp_dma_data_alu_6_in(sdp_dma_data_alu_signal[6]);
+    sdp_inst.sdp_dma_data_alu_7_in(sdp_dma_data_alu_signal[7]);
+    sdp_inst.sdp_dma_data_alu_8_in(sdp_dma_data_alu_signal[8]);
+    sdp_inst.sdp_dma_data_alu_9_in(sdp_dma_data_alu_signal[9]);
+    sdp_inst.sdp_dma_data_alu_10_in(sdp_dma_data_alu_signal[10]);
+    sdp_inst.sdp_dma_data_alu_11_in(sdp_dma_data_alu_signal[11]);
+    sdp_inst.sdp_dma_data_alu_12_in(sdp_dma_data_alu_signal[12]);
+    sdp_inst.sdp_dma_data_alu_13_in(sdp_dma_data_alu_signal[13]);
+    sdp_inst.sdp_dma_data_alu_14_in(sdp_dma_data_alu_signal[14]);
+    sdp_inst.sdp_dma_data_alu_15_in(sdp_dma_data_alu_signal[15]);
 
-    // // All DMA mult input signals
-    // sdp_inst.sdp_dma_data_mult_0_in(sdp_dma_data_mult_signal[0]);
-    // sdp_inst.sdp_dma_data_mult_1_in(sdp_dma_data_mult_signal[1]);
-    // sdp_inst.sdp_dma_data_mult_2_in(sdp_dma_data_mult_signal[2]);
-    // sdp_inst.sdp_dma_data_mult_3_in(sdp_dma_data_mult_signal[3]);
-    // sdp_inst.sdp_dma_data_mult_4_in(sdp_dma_data_mult_signal[4]);
-    // sdp_inst.sdp_dma_data_mult_5_in(sdp_dma_data_mult_signal[5]);
-    // sdp_inst.sdp_dma_data_mult_6_in(sdp_dma_data_mult_signal[6]);
-    // sdp_inst.sdp_dma_data_mult_7_in(sdp_dma_data_mult_signal[7]);
-    // sdp_inst.sdp_dma_data_mult_8_in(sdp_dma_data_mult_signal[8]);
-    // sdp_inst.sdp_dma_data_mult_9_in(sdp_dma_data_mult_signal[9]);
-    // sdp_inst.sdp_dma_data_mult_10_in(sdp_dma_data_mult_signal[10]);
-    // sdp_inst.sdp_dma_data_mult_11_in(sdp_dma_data_mult_signal[11]);
-    // sdp_inst.sdp_dma_data_mult_12_in(sdp_dma_data_mult_signal[12]);
-    // sdp_inst.sdp_dma_data_mult_13_in(sdp_dma_data_mult_signal[13]);
-    // sdp_inst.sdp_dma_data_mult_14_in(sdp_dma_data_mult_signal[14]);
-    // sdp_inst.sdp_dma_data_mult_15_in(sdp_dma_data_mult_signal[15]);
+    // All DMA mult input signals
+    sdp_inst.sdp_dma_data_mult_0_in(sdp_dma_data_mult_signal[0]);
+    sdp_inst.sdp_dma_data_mult_1_in(sdp_dma_data_mult_signal[1]);
+    sdp_inst.sdp_dma_data_mult_2_in(sdp_dma_data_mult_signal[2]);
+    sdp_inst.sdp_dma_data_mult_3_in(sdp_dma_data_mult_signal[3]);
+    sdp_inst.sdp_dma_data_mult_4_in(sdp_dma_data_mult_signal[4]);
+    sdp_inst.sdp_dma_data_mult_5_in(sdp_dma_data_mult_signal[5]);
+    sdp_inst.sdp_dma_data_mult_6_in(sdp_dma_data_mult_signal[6]);
+    sdp_inst.sdp_dma_data_mult_7_in(sdp_dma_data_mult_signal[7]);
+    sdp_inst.sdp_dma_data_mult_8_in(sdp_dma_data_mult_signal[8]);
+    sdp_inst.sdp_dma_data_mult_9_in(sdp_dma_data_mult_signal[9]);
+    sdp_inst.sdp_dma_data_mult_10_in(sdp_dma_data_mult_signal[10]);
+    sdp_inst.sdp_dma_data_mult_11_in(sdp_dma_data_mult_signal[11]);
+    sdp_inst.sdp_dma_data_mult_12_in(sdp_dma_data_mult_signal[12]);
+    sdp_inst.sdp_dma_data_mult_13_in(sdp_dma_data_mult_signal[13]);
+    sdp_inst.sdp_dma_data_mult_14_in(sdp_dma_data_mult_signal[14]);
+    sdp_inst.sdp_dma_data_mult_15_in(sdp_dma_data_mult_signal[15]);
 
     // All CSB input signals
     sdp_inst.sdp_csb_addr_in(sdp_csb_addr_signal);
@@ -379,12 +379,12 @@ int sc_main(int argc, char *argv[])
 {
 
   // Dummy ports
-  // sc_signal<sc_biguint<32>> sdp_cacc_data_main[16];
-  // sc_signal<sc_biguint<32>> sdp_mrdma_data_main[16];
-  // sc_signal<sc_biguint<16>> sdp_regs_data_alu_main[16];
-  // sc_signal<sc_biguint<16>> sdp_regs_data_mult_main[16];
-  // sc_signal<sc_biguint<16>> sdp_dma_data_alu_main[16];
-  // sc_signal<sc_biguint<16>> sdp_dma_data_mult_main[16];
+  sc_signal<sc_biguint<32>> sdp_cacc_data_main[16];
+  sc_signal<sc_biguint<32>> sdp_mrdma_data_main[16];
+  sc_signal<sc_biguint<16>> sdp_regs_data_alu_main[16];
+  sc_signal<sc_biguint<16>> sdp_regs_data_mult_main[16];
+  sc_signal<sc_biguint<16>> sdp_dma_data_alu_main[16];
+  sc_signal<sc_biguint<16>> sdp_dma_data_mult_main[16];
 
   sc_signal<sc_biguint<22>> sdp_csb_addr_main;
   sc_signal<sc_biguint<32>> sdp_csb_data_main;
@@ -408,15 +408,15 @@ int sc_main(int argc, char *argv[])
   testbench tb("tb");
 
   // Linking to dummy ports
-  // for (size_t i = 0; i < 16; i++)
-  // {
-  //   tb.sdp_cacc_data_signal[i](sdp_cacc_data_main[i]);
-  //   tb.sdp_mrdma_data_signal[i](sdp_mrdma_data_main[i]);
-  //   tb.sdp_regs_data_alu_signal[i](sdp_regs_data_alu_main[i]);
-  //   tb.sdp_regs_data_mult_signal[i](sdp_regs_data_mult_main[i]);
-  //   tb.sdp_dma_data_alu_signal[i](sdp_dma_data_alu_main[i]);
-  //   tb.sdp_dma_data_mult_signal[i](sdp_dma_data_mult_main[i]);
-  // }
+  for (size_t i = 0; i < 16; i++)
+  {
+    tb.sdp_cacc_data_signal[i](sdp_cacc_data_main[i]);
+    tb.sdp_mrdma_data_signal[i](sdp_mrdma_data_main[i]);
+    tb.sdp_regs_data_alu_signal[i](sdp_regs_data_alu_main[i]);
+    tb.sdp_regs_data_mult_signal[i](sdp_regs_data_mult_main[i]);
+    tb.sdp_dma_data_alu_signal[i](sdp_dma_data_alu_main[i]);
+    tb.sdp_dma_data_mult_signal[i](sdp_dma_data_mult_main[i]);
+  }
 
   tb.sdp_csb_addr_signal(sdp_csb_addr_main);
   tb.sdp_csb_data_signal(sdp_csb_data_main);
