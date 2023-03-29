@@ -114,9 +114,11 @@ SC_MODULE(Source) {
 
       sdp_fifo_clr = cmd_seq["program fragment"][i]["fifo_clr"].get<int>();
       sdp_done = cmd_seq["program fragment"][i]["done"].get<int>();
+    std::cout << "if prog_frag f " << fin.is_open() << std::endl;
 
       wait(10, SC_NS);
     }
+    std::cout << "if prog_ " << fin.is_open() << std::endl;
 
     input_done = 1;
   }
