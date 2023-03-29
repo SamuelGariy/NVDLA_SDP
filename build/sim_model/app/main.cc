@@ -310,8 +310,25 @@ SC_MODULE(testbench) {
     std::cout << "*********** simulation start ***********" << std::endl;
     wait(10, SC_NS);
 
-    while (input_done == 0) {
-    //  std::cout << "current simulation time: " << '\t' << sc_time_stamp() << "\r" << std::flush;
+   
+    std::ofstream fout;
+    fout.open(output_path, ios::out | ios::trunc);
+
+    int instr_no = 0
+    while (input_done == 0)
+    {
+      fout << "Instruction number " << std::dec << instr_no++ << std::endl;
+      fout << " SDP_D_STATUS => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_unequal << std::endl;
+      fout << " SDP_D_STATUS_NAN_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_nan_input_num << std::endl;
+      fout << " SDP_D_STATUS_INF_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_inf_input_num << std::endl;
+      fout << " SDP_D_STATUS_NAN_OUTPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_nan_output_num << std::endl;
+      fout << " SDP_D_PERF_WDMA_WRITE_STALL => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_wdma_stall << std::endl;
+      fout << " SDP_D_PERF_LUT_UFLOW => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_uflow << std::endl;
+      fout << " SDP_D_PERF_LUT_OFLOW => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_oflow << std::endl;
+      fout << " SDP_D_PERF_OUT_SATURATION => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_out_saturation << std::endl;
+      fout << " SDP_D_PERF_LUT_HYBRID => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_hybrid << std::endl;
+      fout << " SDP_D_PERF_LUT_LE_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_le_hit << std::endl;
+      fout << " SDP_D_PERF_LUT_LO_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_lo_hit << std::endl;
       wait(10, SC_NS);
     }
 
@@ -320,23 +337,23 @@ SC_MODULE(testbench) {
     // Log final outputs
     std::ofstream fout;
     fout.open(output_path, ios::out | ios::trunc);
- 
-    fout << "    sdp_pdp_output_0 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_0 << std::endl; 
-    fout << "    sdp_pdp_output_1 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_1 << std::endl; 
-    fout << "    sdp_pdp_output_2 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_2 << std::endl; 
-    fout << "    sdp_pdp_output_3 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_3 << std::endl; 
-    fout << "    sdp_pdp_output_4 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_4 << std::endl; 
-    fout << "    sdp_pdp_output_5 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_5 << std::endl; 
-    fout << "    sdp_pdp_output_6 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_6 << std::endl; 
-    fout << "    sdp_pdp_output_7 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_7 << std::endl; 
-    fout << "    sdp_pdp_output_8 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_8 << std::endl; 
-    fout << "    sdp_pdp_output_9 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_9 << std::endl; 
-    fout << "    sdp_pdp_output_10 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_10 << std::endl; 
-    fout << "    sdp_pdp_output_11 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_11 << std::endl; 
-    fout << "    sdp_pdp_output_12 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_12 << std::endl; 
-    fout << "    sdp_pdp_output_13 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_13 << std::endl; 
-    fout << "    sdp_pdp_output_14 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_14 << std::endl; 
-    fout << "    sdp_pdp_output_15 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_15 << std::endl; 
+
+    // fout << "    sdp_pdp_output_0 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_0 << std::endl;
+    // fout << "    sdp_pdp_output_1 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_1 << std::endl;
+    // fout << "    sdp_pdp_output_2 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_2 << std::endl;
+    // fout << "    sdp_pdp_output_3 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_3 << std::endl;
+    // fout << "    sdp_pdp_output_4 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_4 << std::endl;
+    // fout << "    sdp_pdp_output_5 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_5 << std::endl;
+    // fout << "    sdp_pdp_output_6 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_6 << std::endl;
+    // fout << "    sdp_pdp_output_7 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_7 << std::endl;
+    // fout << "    sdp_pdp_output_8 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_8 << std::endl;
+    // fout << "    sdp_pdp_output_9 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_9 << std::endl;
+    // fout << "    sdp_pdp_output_10 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_10 << std::endl;
+    // fout << "    sdp_pdp_output_11 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_11 << std::endl;
+    // fout << "    sdp_pdp_output_12 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_12 << std::endl;
+    // fout << "    sdp_pdp_output_13 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_13 << std::endl;
+    // fout << "    sdp_pdp_output_14 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_14 << std::endl;
+    // fout << "    sdp_pdp_output_15 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_15 << std::endl;
 
     fout.close();
     std::cout << "outputs have been store at " << output_path << std::endl;
