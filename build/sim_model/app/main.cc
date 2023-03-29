@@ -70,12 +70,12 @@ SC_MODULE(Source)
   void source_input()
   {
     // Reset the ports
-    std::fill(sdp_cacc_data, sdp_cacc_data + 16, 0);
-    std::fill(sdp_mrdma_data, sdp_mrdma_data + 16, 0);
-    std::fill(sdp_regs_data_alu, sdp_regs_data_alu + 16, 0);
-    std::fill(sdp_regs_data_mult, sdp_regs_data_mult + 16, 0);
-    std::fill(sdp_dma_data_alu, sdp_dma_data_alu + 16, 0);
-    std::fill(sdp_dma_data_mult, sdp_dma_data_mult + 16, 0);
+    // std::fill(sdp_cacc_data, sdp_cacc_data + 16, 0);
+    // std::fill(sdp_mrdma_data, sdp_mrdma_data + 16, 0);
+    // std::fill(sdp_regs_data_alu, sdp_regs_data_alu + 16, 0);
+    // std::fill(sdp_regs_data_mult, sdp_regs_data_mult + 16, 0);
+    // std::fill(sdp_dma_data_alu, sdp_dma_data_alu + 16, 0);
+    // std::fill(sdp_dma_data_mult, sdp_dma_data_mult + 16, 0);
 
     sdp_csb_addr = 0;
     sdp_csb_data = 0;
