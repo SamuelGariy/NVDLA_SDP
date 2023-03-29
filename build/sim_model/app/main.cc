@@ -314,7 +314,7 @@ SC_MODULE(testbench) {
     std::ofstream fout;
     fout.open(output_path, ios::out | ios::trunc);
 
-    int instr_no = 0
+    int instr_no = 0;
     while (input_done == 0)
     {
       fout << "Instruction number " << std::dec << instr_no++ << std::endl;
