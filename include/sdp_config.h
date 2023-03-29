@@ -351,7 +351,7 @@ inline std::string GetVarName(const std::string& var_name0, const std::string& v
 
 // b0e4 done
 #define NVDLA_SDP_D_PERF_LUT_UFLOW "d_lut_uflow"
-#define NVDLA_SDP_D_ZERO_PADDING_WIDTH 32
+#define NVDLA_SDP_D_PERF_LUT_UFLOW_WIDTH 32
 
 // b0e8 done
 #define NVDLA_SDP_D_PERF_LUT_OFLOW "d_lut_oflow"
