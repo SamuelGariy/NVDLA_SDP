@@ -105,6 +105,7 @@ SC_MODULE(Source) {
         sdp_dma_data_mult[j] = cmd_seq["program fragment"][i]["dma_data_mult_" + std::to_string(j)].get<int>();
       }
 
+     // sdp_csb_addr = std::stoi((cmd_seq["program fragment"][i]["csb_addr"].get<std::string>()).c_str(), nullptr, 16);
       sdp_csb_addr = std::stoi((cmd_seq["program fragment"][i]["csb_addr"].get<std::string>()).c_str(), nullptr, 16);
 
       sdp_csb_data = cmd_seq["program fragment"][i]["csb_data"].get<int>();
@@ -317,6 +318,7 @@ SC_MODULE(testbench) {
     while (input_done == 0)
     {
         // Log final outputs
+    std::cout << "Instruction number " << std::dec << instr_no++ << std::endl;
     fout << "Instruction number " << std::dec << instr_no++ << std::endl;
     fout << " NVDLA_SDP_S_PRODUCER => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_s_producer << std::endl;
     fout << " NVDLA_SDP_D_OP_ENABLE => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_op_en << std::endl;
