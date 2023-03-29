@@ -100,15 +100,15 @@ SC_MODULE(Source)
     // Pass the command to the ports
     for (size_t i = 0; i < cmd_seq["program fragment"].size(); i++)
     {
-      for (size_t j = 0; j < 16; j++)
-      {
-        sdp_cacc_data[j] = cmd_seq["program fragment"][i]["cacc_data_" + std::to_string(j)].get<int>();
-        sdp_mrdma_data[j] = cmd_seq["program fragment"][i]["mrdma_data_" + std::to_string(j)].get<int>();
-        sdp_regs_data_alu[j] = cmd_seq["program fragment"][i]["regs_data_alu_" + std::to_string(j)].get<int>();
-        sdp_regs_data_mult[j] = cmd_seq["program fragment"][i]["regs_data_mult_" + std::to_string(j)].get<int>();
-        sdp_dma_data_alu[j] = cmd_seq["program fragment"][i]["dma_data_alu_" + std::to_string(j)].get<int>();
-        sdp_dma_data_mult[j] = cmd_seq["program fragment"][i]["dma_data_mult_" + std::to_string(j)].get<int>();
-      }
+      // for (size_t j = 0; j < 16; j++)
+      // {
+      //   sdp_cacc_data[j] = cmd_seq["program fragment"][i]["cacc_data_" + std::to_string(j)].get<int>();
+      //   sdp_mrdma_data[j] = cmd_seq["program fragment"][i]["mrdma_data_" + std::to_string(j)].get<int>();
+      //   sdp_regs_data_alu[j] = cmd_seq["program fragment"][i]["regs_data_alu_" + std::to_string(j)].get<int>();
+      //   sdp_regs_data_mult[j] = cmd_seq["program fragment"][i]["regs_data_mult_" + std::to_string(j)].get<int>();
+      //   sdp_dma_data_alu[j] = cmd_seq["program fragment"][i]["dma_data_alu_" + std::to_string(j)].get<int>();
+      //   sdp_dma_data_mult[j] = cmd_seq["program fragment"][i]["dma_data_mult_" + std::to_string(j)].get<int>();
+      // }
 
       sdp_csb_addr = std::stoi((cmd_seq["program fragment"][i]["csb_addr"].get<std::string>()).c_str(), nullptr, 16);
 
