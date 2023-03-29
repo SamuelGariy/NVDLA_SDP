@@ -318,7 +318,7 @@ SC_MODULE(testbench) {
     {
       fout << "Instruction number " << std::dec << instr_no++ << std::endl;
       fout << " NVDLA_SDP_S_PRODUCER => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_s_producer << std::endl;
-      fout << " NVDLA_SDP_D_OP_ENABLE => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_d_op_en << std::endl;
+      fout << " NVDLA_SDP_D_OP_ENABLE => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_op_en << std::endl;
       fout << " SDP_D_STATUS => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_unequal << std::endl;
       fout << " SDP_D_STATUS_NAN_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_nan_input_num << std::endl;
       fout << " SDP_D_STATUS_INF_INPUT_NUM => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_status_inf_input_num << std::endl;
