@@ -311,7 +311,7 @@
         "dma_data_mult_14": 0,
         "dma_data_mult_15": 0,
         "csb_addr": "0xb0cc",
-        "csb_data": 2,
+        "csb_data": 1,
         "csb_write": 1,
         "csb_vld": 1,
         "csb_rdy": 1,
