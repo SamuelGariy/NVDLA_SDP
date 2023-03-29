@@ -330,7 +330,7 @@ SC_MODULE(testbench) {
       fout << " SDP_D_PERF_LUT_HYBRID => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_hybrid << std::endl;
       fout << " SDP_D_PERF_LUT_LE_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_le_hit << std::endl;
       fout << " SDP_D_PERF_LUT_LO_HIT => " << std::dec << (sc_dt::sc_bigint<16>)sdp_inst.sdp_group0_d_lut_lo_hit << std::endl;
-      wait(20, SC_NS);
+      wait(30, SC_NS);
         fout << std::endl;
     }
 
