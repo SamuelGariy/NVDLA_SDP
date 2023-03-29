@@ -89,7 +89,7 @@ SC_MODULE(Source) {
 
     // Read program fragment from file
     std::ifstream fin;
-    fin.open(prog_frag_path);
+    fin.open(prog_frag_path, ios::in);
     std::cout << "if prog_frag file open? " << fin.is_open() << std::endl;
     json cmd_seq;
     cmd_seq = json::parse(fin);
