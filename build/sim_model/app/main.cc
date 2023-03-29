@@ -317,7 +317,7 @@ SC_MODULE(testbench)
     std::cout << "*********** simulation start ***********" << std::endl;
     wait(10, SC_NS);
 
-    int instr_no = 0
+    int instr_no = 0;
     while (input_done == 0)
     {
       //  std::cout << "current simulation time: " << '\t' << sc_time_stamp() << "\r" << std::flush;
