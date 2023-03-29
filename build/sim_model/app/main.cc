@@ -318,6 +318,10 @@ SC_MODULE(testbench)
     wait(10, SC_NS);
 
     int instr_no = 0;
+    // Log final outputs
+    std::ofstream fout;
+    fout.open(output_path, ios::out | ios::trunc);
+
     while (input_done == 0)
     {
       //  std::cout << "current simulation time: " << '\t' << sc_time_stamp() << "\r" << std::flush;
@@ -338,9 +342,7 @@ SC_MODULE(testbench)
 
     wait(1000, SC_NS);
 
-    // Log final outputs
-    std::ofstream fout;
-    fout.open(output_path, ios::out | ios::trunc);
+   
 
     fout << "    sdp_pdp_output_0 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_0 << std::endl;
     fout << "    sdp_pdp_output_1 => " << std::hex << "0x" << sdp_inst.sdp_pdp_output_1 << std::endl;
