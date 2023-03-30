@@ -43,12 +43,12 @@ namespace ilang
         auto csb_valid = (m.input("csb_rdy") == BvConst(1, 1)) &
                          (m.input("csb_vld") == BvConst(1, 1));
         auto csb_write = m.input("csb_write") == BvConst(1, 1);
-        auto group0_unset =
+        auto group0_set =
             SelectBit(m.state(GetVarName("group0_", NVDLA_SDP_D_OP_ENABLE)), 0) ==
-            BvConst(0, 1);
-        auto group1_unset =
+            BvConst(1, 1);
+        auto group1_set =
             SelectBit(m.state(GetVarName("group1_", NVDLA_SDP_D_OP_ENABLE)), 0) ==
-            BvConst(0, 1);
+            BvConst(1, 1);
         auto producer = SelectBit(m.state(NVDLA_SDP_S_PRODUCER), 0);
         auto consumer = SelectBit(m.state(NVDLA_SDP_S_CONSUMER), 0);
         auto done = SelectBit(m.input("done"), 0);
@@ -211,7 +211,7 @@ namespace ilang
         { // 0038_group0
             auto instr = m.NewInstr("OP_ENABLE_group0");
             instr.SetDecode((csb_addr == 0x038) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)));
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_OP_ENABLE)),
                             SelectBit(m.input("csb_data"), 0));
@@ -220,7 +220,7 @@ namespace ilang
         { // 0038_group1
             auto instr = m.NewInstr("OP_ENABLE_group1");
             instr.SetDecode((csb_addr == 0x038) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)));
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_OP_ENABLE)),
                             SelectBit(m.input("csb_data"), 0));
@@ -230,7 +230,7 @@ namespace ilang
         { // 003c_group0
             auto instr = m.NewInstr("DATA_CUBE_WIDTH_group0");
             instr.SetDecode((csb_addr == 0x03c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DATA_CUBE_WIDTH)),
@@ -240,7 +240,7 @@ namespace ilang
         { // 003c_group1
             auto instr = m.NewInstr("DATA_CUBE_WIDTH_group1");
             instr.SetDecode((csb_addr == 0x03c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DATA_CUBE_WIDTH)),
@@ -251,7 +251,7 @@ namespace ilang
         { // 0040_group0
             auto instr = m.NewInstr("DATA_CUBE_HEIGHT_group0");
             instr.SetDecode((csb_addr == 0x040) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DATA_CUBE_HEIGHT)),
@@ -261,7 +261,7 @@ namespace ilang
         { // 0040_group1
             auto instr = m.NewInstr("DATA_CUBE_HEIGHT_group1");
             instr.SetDecode((csb_addr == 0x040) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DATA_CUBE_HEIGHT)),
@@ -272,7 +272,7 @@ namespace ilang
         { // 0044_group0
             auto instr = m.NewInstr("DATA_CUBE_CHANNEL_group0");
             instr.SetDecode((csb_addr == 0x044) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DATA_CUBE_CHANNEL)),
@@ -282,7 +282,7 @@ namespace ilang
         { // 0044_group1
             auto instr = m.NewInstr("DATA_CUBE_CHANNEL_group1");
             instr.SetDecode((csb_addr == 0x044) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DATA_CUBE_CHANNEL)),
@@ -293,7 +293,7 @@ namespace ilang
         { // 0048_group0
             auto instr = m.NewInstr("DST_BASE_ADDR_LOW_group0");
             instr.SetDecode((csb_addr == 0x048) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DST_BASE_ADDR_LOW)),
@@ -303,7 +303,7 @@ namespace ilang
         { // 0048_group1
             auto instr = m.NewInstr("DST_BASE_ADDR_LOW_group1");
             instr.SetDecode((csb_addr == 0x048) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DST_BASE_ADDR_LOW)),
@@ -314,7 +314,7 @@ namespace ilang
         { // 004c_group0
             auto instr = m.NewInstr("DST_BASE_ADDR_HIGH_group0");
             instr.SetDecode((csb_addr == 0x04c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DST_BASE_ADDR_HIGH)),
@@ -324,7 +324,7 @@ namespace ilang
         { // 004c_group1
             auto instr = m.NewInstr("DST_BASE_ADDR_HIGH_group1");
             instr.SetDecode((csb_addr == 0x04c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DST_BASE_ADDR_HIGH)),
@@ -335,7 +335,7 @@ namespace ilang
         { // 0050_group0
             auto instr = m.NewInstr("DST_LINE_STRIDE_group0");
             instr.SetDecode((csb_addr == 0x050) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DST_LINE_STRIDE)),
@@ -345,7 +345,7 @@ namespace ilang
         { // 0050_group1
             auto instr = m.NewInstr("DST_LINE_STRIDE_group1");
             instr.SetDecode((csb_addr == 0x050) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DST_LINE_STRIDE)),
@@ -356,7 +356,7 @@ namespace ilang
         { // 0054_group0
             auto instr = m.NewInstr("DST_SURFACE_STRIDE_group0");
             instr.SetDecode((csb_addr == 0x054) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DST_SURFACE_STRIDE)),
@@ -366,7 +366,7 @@ namespace ilang
         { // 0054_group1
             auto instr = m.NewInstr("DST_SURFACE_STRIDE_group1");
             instr.SetDecode((csb_addr == 0x054) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DST_SURFACE_STRIDE)),
@@ -377,7 +377,7 @@ namespace ilang
         { // 0058_group0
             auto instr = m.NewInstr("DP_BS_CFG_group0");
             instr.SetDecode((csb_addr == 0x058) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BS_RELU_BYPASS)),
@@ -400,7 +400,7 @@ namespace ilang
         { // 0058_group1
             auto instr = m.NewInstr("DP_BS_CFG_group1");
             instr.SetDecode((csb_addr == 0x058) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BS_RELU_BYPASS)),
@@ -424,7 +424,7 @@ namespace ilang
         { // 005c_group0
             auto instr = m.NewInstr("DP_BS_ALU_CFG_group0");
             instr.SetDecode((csb_addr == 0x05c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BS_ALU_SHIFT_VALUE)),
@@ -436,7 +436,7 @@ namespace ilang
         { // 005c_group1
             auto instr = m.NewInstr("DP_BS_ALU_CFG_group1");
             instr.SetDecode((csb_addr == 0x05c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BS_ALU_SHIFT_VALUE)),
@@ -449,7 +449,7 @@ namespace ilang
         { // 0060_group0
             auto instr = m.NewInstr("DP_BS_ALU_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x060) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_BS_ALU_SRC_VALUE)),
@@ -459,7 +459,7 @@ namespace ilang
         { // 0060_group1
             auto instr = m.NewInstr("DP_BS_ALU_SRC_VALUE_group1");
             instr.SetDecode((csb_addr == 0x060) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_BS_ALU_SRC_VALUE)),
@@ -470,7 +470,7 @@ namespace ilang
         { // 0064_group0
             auto instr = m.NewInstr("DP_BS_MUL_CFG_group0");
             instr.SetDecode((csb_addr == 0x064) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BS_MUL_SHIFT_VALUE)),
@@ -482,7 +482,7 @@ namespace ilang
         { // 0064_group1
             auto instr = m.NewInstr("DP_BS_MUL_CFG_group1");
             instr.SetDecode((csb_addr == 0x064) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BS_MUL_SHIFT_VALUE)),
@@ -495,7 +495,7 @@ namespace ilang
         { // 0068_group0
             auto instr = m.NewInstr("DP_BS_MUL_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x068) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_BS_MUL_SRC_VALUE)),
@@ -505,7 +505,7 @@ namespace ilang
         { // 0068_group1
             auto instr = m.NewInstr("DP_BS_MUL_SRC_VALUE_group1");
             instr.SetDecode((csb_addr == 0x068) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_BS_MUL_SRC_VALUE)),
@@ -516,7 +516,7 @@ namespace ilang
         { // 006c_group0
             auto instr = m.NewInstr("DP_BN_CFG_group0");
             instr.SetDecode((csb_addr == 0x06c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BN_RELU_BYPASS)),
@@ -539,7 +539,7 @@ namespace ilang
         { // 006c_group1
             auto instr = m.NewInstr("DP_BN_CFG_group1");
             instr.SetDecode((csb_addr == 0x06c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BN_RELU_BYPASS)),
@@ -563,7 +563,7 @@ namespace ilang
         { // 0070_group0
             auto instr = m.NewInstr("DP_BN_ALU_CFG_group0");
             instr.SetDecode((csb_addr == 0x070) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BN_ALU_SHIFT_VALUE)),
@@ -575,7 +575,7 @@ namespace ilang
         { // 0070_group1
             auto instr = m.NewInstr("DP_BN_ALU_CFG_group1");
             instr.SetDecode((csb_addr == 0x070) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BN_ALU_SHIFT_VALUE)),
@@ -588,7 +588,7 @@ namespace ilang
         { // 0074_group0
             auto instr = m.NewInstr("DP_BN_ALU_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x074) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_BN_ALU_SRC_VALUE)),
@@ -598,7 +598,7 @@ namespace ilang
         { // 0074_group1
             auto instr = m.NewInstr("DP_BN_ALU_SRC_VALUE_group1");
             instr.SetDecode((csb_addr == 0x074) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_BN_ALU_SRC_VALUE)),
@@ -609,7 +609,7 @@ namespace ilang
         { // 0078_group0
             auto instr = m.NewInstr("DP_BN_MUL_CFG_group0");
             instr.SetDecode((csb_addr == 0x078) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BN_MUL_SHIFT_VALUE)),
@@ -621,7 +621,7 @@ namespace ilang
         { // 0078_group1
             auto instr = m.NewInstr("DP_BN_MUL_CFG_group1");
             instr.SetDecode((csb_addr == 0x078) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BN_MUL_SHIFT_VALUE)),
@@ -634,7 +634,7 @@ namespace ilang
         { // 007c_group0
             auto instr = m.NewInstr("DP_BN_MUL_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x07c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_BN_MUL_SRC_VALUE)),
@@ -644,7 +644,7 @@ namespace ilang
         { // 007c_group1
             auto instr = m.NewInstr("DP_BN_MUL_SRC_VALUE_group1");
             instr.SetDecode((csb_addr == 0x07c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_BN_MUL_SRC_VALUE)),
@@ -655,7 +655,7 @@ namespace ilang
         { // 0080_group0
             auto instr = m.NewInstr("DP_EW_CFG_group0");
             instr.SetDecode((csb_addr == 0x080) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_EW_LUT_BYPASS)),
@@ -678,7 +678,7 @@ namespace ilang
         { // 0080_group1
             auto instr = m.NewInstr("DP_EW_CFG_group1");
             instr.SetDecode((csb_addr == 0x080) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_EW_LUT_BYPASS)),
@@ -702,7 +702,7 @@ namespace ilang
         { // 0084_group0
             auto instr = m.NewInstr("DP_EW_ALU_CFG_group0");
             instr.SetDecode((csb_addr == 0x084) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_EW_ALU_CVT_BYPASS)),
@@ -714,7 +714,7 @@ namespace ilang
         { // 0084_group1
             auto instr = m.NewInstr("DP_EW_ALU_CFG_group1");
             instr.SetDecode((csb_addr == 0x084) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_EW_ALU_CVT_BYPASS)),
@@ -727,7 +727,7 @@ namespace ilang
         { // 0088_group0
             auto instr = m.NewInstr("DP_EW_ALU_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x088) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_EW_ALU_SRC_VALUE)),
@@ -737,7 +737,7 @@ namespace ilang
         { // 0088_group1
             auto instr = m.NewInstr("DP_EW_ALU_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x088) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_EW_ALU_SRC_VALUE)),
@@ -748,7 +748,7 @@ namespace ilang
         { // 008c_group0
             auto instr = m.NewInstr("DP_EW_ALU_CVT_OFFSET_VALUE_group0");
             instr.SetDecode((csb_addr == 0x08c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group0_", NVDLA_SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE)),
@@ -758,7 +758,7 @@ namespace ilang
         { // 008c_group1
             auto instr = m.NewInstr("DP_EW_ALU_CVT_OFFSET_VALUE_group1");
             instr.SetDecode((csb_addr == 0x08c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group1_", NVDLA_SDP_D_DP_EW_ALU_CVT_OFFSET_VALUE)),
@@ -769,7 +769,7 @@ namespace ilang
         { // 0090_group0
             auto instr = m.NewInstr("DP_EW_ALU_CVT_SCALE_VALUE_group0");
             instr.SetDecode((csb_addr == 0x090) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group0_", NVDLA_SDP_D_DP_EW_ALU_CVT_SCALE_VALUE)),
@@ -779,7 +779,7 @@ namespace ilang
         { // 0090_group1
             auto instr = m.NewInstr("DP_EW_ALU_CVT_SCALE_VALUE_group1");
             instr.SetDecode((csb_addr == 0x090) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group1_", NVDLA_SDP_D_DP_EW_ALU_CVT_SCALE_VALUE)),
@@ -790,7 +790,7 @@ namespace ilang
         { // 0094_group0
             auto instr = m.NewInstr("DP_EW_ALU_CVT_TRUNCATE_VALUE_group0");
             instr.SetDecode((csb_addr == 0x094) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_",
@@ -801,7 +801,7 @@ namespace ilang
         { // 0094_group1
             auto instr = m.NewInstr("DP_EW_ALU_CVT_TRUNCATE_VALUE_group1");
             instr.SetDecode((csb_addr == 0x094) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_",
@@ -813,7 +813,7 @@ namespace ilang
         { // 0098_group0
             auto instr = m.NewInstr("DP_EW_MUL_CFG_group0");
             instr.SetDecode((csb_addr == 0x090) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_EW_MUL_CVT_BYPASS)),
@@ -825,7 +825,7 @@ namespace ilang
         { // 0098_group1
             auto instr = m.NewInstr("DP_EW_MUL_CFG_group1");
             instr.SetDecode((csb_addr == 0x098) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_EW_MUL_CVT_BYPASS)),
@@ -838,7 +838,7 @@ namespace ilang
         { // 009c_group0
             auto instr = m.NewInstr("DP_EW_MUL_SRC_VALUE_group0");
             instr.SetDecode((csb_addr == 0x09c) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_EW_MUL_SRC_VALUE)),
@@ -848,7 +848,7 @@ namespace ilang
         { // 009c_group1
             auto instr = m.NewInstr("DP_EW_MUL_SRC_VALUE_group1");
             instr.SetDecode((csb_addr == 0x09c) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_EW_MUL_SRC_VALUE)),
@@ -859,7 +859,7 @@ namespace ilang
         { // 00a0_group0
             auto instr = m.NewInstr("DP_EW_MUL_CVT_OFFSET_VALUE_group0");
             instr.SetDecode((csb_addr == 0x0a0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group0_", NVDLA_SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE)),
@@ -869,7 +869,7 @@ namespace ilang
         { // 00a0_group1
             auto instr = m.NewInstr("DP_EW_MUL_CVT_OFFSET_VALUE_group1");
             instr.SetDecode((csb_addr == 0x0a0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group1_", NVDLA_SDP_D_DP_EW_MUL_CVT_OFFSET_VALUE)),
@@ -880,7 +880,7 @@ namespace ilang
         { // 00a4_group0
             auto instr = m.NewInstr("DP_EW_MUL_CVT_SCALE_VALUE_group0");
             instr.SetDecode((csb_addr == 0x0a4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group0_", NVDLA_SDP_D_DP_EW_MUL_CVT_SCALE_VALUE)),
@@ -890,7 +890,7 @@ namespace ilang
         { // 00a4_group1
             auto instr = m.NewInstr("DP_EW_MUL_CVT_SCALE_VALUE_group1");
             instr.SetDecode((csb_addr == 0x0a4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName(
                                 "group1_", NVDLA_SDP_D_DP_EW_MUL_CVT_SCALE_VALUE)),
@@ -901,7 +901,7 @@ namespace ilang
         { // 00a8_group0
             auto instr = m.NewInstr("DP_EW_MUL_CVT_TRUNCATE_VALUE_group0");
             instr.SetDecode((csb_addr == 0x0a8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_",
@@ -912,7 +912,7 @@ namespace ilang
         { // 00a8_group1
             auto instr = m.NewInstr("DP_EW_MUL_CVT_TRUNCATE_VALUE_group1");
             instr.SetDecode((csb_addr == 0x0a8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_",
@@ -924,7 +924,7 @@ namespace ilang
         { // 00ac_group0
             auto instr = m.NewInstr("DP_EW_TRUNCATE_VALUE_group0");
             instr.SetDecode((csb_addr == 0x0ac) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DP_EW_TRUNCATE_VALUE)),
@@ -934,7 +934,7 @@ namespace ilang
         { // 00ac_group1
             auto instr = m.NewInstr("DP_EW_TRUNCATE_VALUE_group1");
             instr.SetDecode((csb_addr == 0x0ac) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DP_EW_TRUNCATE_VALUE)),
@@ -945,7 +945,7 @@ namespace ilang
         { // 00b0_group0
             auto instr = m.NewInstr("FEATURE_MODE_CFG_group0");
             instr.SetDecode((csb_addr == 0x0b0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_BATCH_NUMBER)),
@@ -963,7 +963,7 @@ namespace ilang
         { // 00b0_group1
             auto instr = m.NewInstr("FEATURE_MODE_CFG_group1");
             instr.SetDecode((csb_addr == 0x0b0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_BATCH_NUMBER)),
@@ -982,7 +982,7 @@ namespace ilang
         { // 00b4_group0
             auto instr = m.NewInstr("DST_DMA_CFG_group0");
             instr.SetDecode((csb_addr == 0x0b4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_DST_DMA_CFG)),
                             SelectBit(m.input("csb_data"), 0));
@@ -991,7 +991,7 @@ namespace ilang
         { // 00b4_group1
             auto instr = m.NewInstr("DST_DMA_CFG_group1");
             instr.SetDecode((csb_addr == 0x0b4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_DST_DMA_CFG)),
                             SelectBit(m.input("csb_data"), 0));
@@ -1001,7 +1001,7 @@ namespace ilang
         { // 00b8_group0
             auto instr = m.NewInstr("DST_BATCH_STRIDE_group0");
             instr.SetDecode((csb_addr == 0x0b8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_DST_BATCH_STRIDE)),
@@ -1011,7 +1011,7 @@ namespace ilang
         { // 00b8_group1
             auto instr = m.NewInstr("DST_BATCH_STRIDE_group1");
             instr.SetDecode((csb_addr == 0x0b8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_DST_BATCH_STRIDE)),
@@ -1022,7 +1022,7 @@ namespace ilang
         { // 00bc_group0
             auto instr = m.NewInstr("DATA_FORMAT_group0");
             instr.SetDecode((csb_addr == 0x0bc) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_OUT_PRECISION)),
@@ -1035,7 +1035,7 @@ namespace ilang
         { // 00bc_group1
             auto instr = m.NewInstr("DATA_FORMAT_group1");
             instr.SetDecode((csb_addr == 0x0bc) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_OUT_PRECISION)),
@@ -1049,7 +1049,7 @@ namespace ilang
         { // 00c0_group0
             auto instr = m.NewInstr("CVT_OFFSET_group0");
             instr.SetDecode((csb_addr == 0x0c0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_CVT_OFFSET)),
                             Extract(m.input("csb_data"), 31, 0));
@@ -1058,7 +1058,7 @@ namespace ilang
         { // 00c0_group1
             auto instr = m.NewInstr("CVT_OFFSET_group1");
             instr.SetDecode((csb_addr == 0x0c0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_CVT_OFFSET)),
                             Extract(m.input("csb_data"), 31, 0));
@@ -1068,7 +1068,7 @@ namespace ilang
         { // 00c4_group0
             auto instr = m.NewInstr("CVT_SCALE_group0");
             instr.SetDecode((csb_addr == 0x0c4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_CVT_SCALE)),
                             Extract(m.input("csb_data"), 15, 0));
@@ -1077,7 +1077,7 @@ namespace ilang
         { // 00c4_group1
             auto instr = m.NewInstr("CVT_SCALE_group1");
             instr.SetDecode((csb_addr == 0x0c4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_CVT_SCALE)),
                             Extract(m.input("csb_data"), 15, 0));
@@ -1087,7 +1087,7 @@ namespace ilang
         { // 00c8_group0
             auto instr = m.NewInstr("CVT_SHIFT_group0");
             instr.SetDecode((csb_addr == 0x0c8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_CVT_SHIFT)),
                             Extract(m.input("csb_data"), 5, 0));
@@ -1096,7 +1096,7 @@ namespace ilang
         { // 00c8_group1
             auto instr = m.NewInstr("CVT_SHIFT_group1");
             instr.SetDecode((csb_addr == 0x0c8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_CVT_SHIFT)),
                             Extract(m.input("csb_data"), 5, 0));
@@ -1106,7 +1106,7 @@ namespace ilang
         { // 00cc_group0
             auto instr = m.NewInstr("D_STATUS_group0");
             instr.SetDecode((csb_addr == 0xb0cc) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
@@ -1115,7 +1115,7 @@ namespace ilang
         { // 00cc_group1
             auto instr = m.NewInstr("D_STATUS_group1");
             instr.SetDecode((csb_addr == 0xb0cc) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
@@ -1125,7 +1125,7 @@ namespace ilang
         { // 00d0_group0
             auto instr = m.NewInstr("D_STATUS_NAN_INPUT_NUM_group0");
             instr.SetDecode((csb_addr == 0xb0d0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
@@ -1134,7 +1134,7 @@ namespace ilang
         { // 00do_group1
             auto instr = m.NewInstr("D_STATUS_NAN_INPUT_NUM_group1");
             instr.SetDecode((csb_addr == 0xb0d0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
@@ -1144,7 +1144,7 @@ namespace ilang
         { // 00d4_group0
             auto instr = m.NewInstr("D_STATUS_INF_INPUT_NUM_group0");
             instr.SetDecode((csb_addr == 0xb0d4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
@@ -1153,7 +1153,7 @@ namespace ilang
         { // 00d4_group1
             auto instr = m.NewInstr("D_STATUS_INF_INPUT_NUM_group1");
             instr.SetDecode((csb_addr == 0xb0d4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
@@ -1163,7 +1163,7 @@ namespace ilang
         { // 00d8_group0
             auto instr = m.NewInstr("D_STATUS_NAN_OUTPUT_NUM_group0");
             instr.SetDecode((csb_addr == 0xb0d8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
@@ -1172,7 +1172,7 @@ namespace ilang
         { // 00d8_group1
             auto instr = m.NewInstr("D_STATUS_NAN_OUTPUT_NUM_group1");
             instr.SetDecode((csb_addr == 0xb0d8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
@@ -1182,7 +1182,7 @@ namespace ilang
         { // 00dc_group0
             auto instr = m.NewInstr("PERF_ENABLE_group0");
             instr.SetDecode((csb_addr == 0x0dc) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_NAN_INF_COUNT_EN)),
@@ -1198,7 +1198,7 @@ namespace ilang
         { // 00dc_group1
             auto instr = m.NewInstr("PERF_ENABLE_group1");
             instr.SetDecode((csb_addr == 0x0dc) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(
                 m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_NAN_INF_COUNT_EN)),
@@ -1215,7 +1215,7 @@ namespace ilang
         { // 00e0_group0
             auto instr = m.NewInstr("D_PERF_WDMA_WRITE_STALL_group0");
             instr.SetDecode((csb_addr == 0xb0e0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
@@ -1224,7 +1224,7 @@ namespace ilang
         { // 00e0_group1
             auto instr = m.NewInstr("D_PERF_WDMA_WRITE_STALL_group1");
             instr.SetDecode((csb_addr == 0xb0e0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
@@ -1234,7 +1234,7 @@ namespace ilang
         { // 00e4_group0
             auto instr = m.NewInstr("D_PERF_LUT_UFLOW_group0");
             instr.SetDecode((csb_addr == 0xb0e4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
@@ -1243,7 +1243,7 @@ namespace ilang
         { // 00e4_group1
             auto instr = m.NewInstr("D_PERF_LUT_UFLOW_group1");
             instr.SetDecode((csb_addr == 0xb0e4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
@@ -1253,7 +1253,7 @@ namespace ilang
         { // 00e8_group0
             auto instr = m.NewInstr("D_PERF_LUT_OFLOW_group0");
             instr.SetDecode((csb_addr == 0xb0e8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
@@ -1262,7 +1262,7 @@ namespace ilang
         { // 00e8_group1
             auto instr = m.NewInstr("D_PERF_LUT_OFLOW_group1");
             instr.SetDecode((csb_addr == 0xb0e8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
@@ -1272,7 +1272,7 @@ namespace ilang
         { // 00ec_group0
             auto instr = m.NewInstr("D_PERF_OUT_SATURATION_group0");
             instr.SetDecode((csb_addr == 0xb0ec) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
@@ -1281,7 +1281,7 @@ namespace ilang
         { // 00ec_group1
             auto instr = m.NewInstr("D_PERF_OUT_SATURATION_group1");
             instr.SetDecode((csb_addr == 0xb0ec) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
@@ -1291,7 +1291,7 @@ namespace ilang
         { // 00f0_group0
             auto instr = m.NewInstr("D_PERF_LUT_HYBRID_group0");
             instr.SetDecode((csb_addr == 0xb0f0) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
@@ -1300,7 +1300,7 @@ namespace ilang
         { // 00f0_group1
             auto instr = m.NewInstr("D_PERF_LUT_HYBRID_group1");
             instr.SetDecode((csb_addr == 0xb0f0) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
@@ -1310,7 +1310,7 @@ namespace ilang
         { // 00f4_group0
             auto instr = m.NewInstr("D_PERF_LUT_LE_HIT_group0");
             instr.SetDecode((csb_addr == 0xb0f4) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
@@ -1319,7 +1319,7 @@ namespace ilang
         { // 00f4_group1
             auto instr = m.NewInstr("D_PERF_LUT_LE_HIT_group1");
             instr.SetDecode((csb_addr == 0xb0f4) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
@@ -1329,7 +1329,7 @@ namespace ilang
         { // 00f8_group0
             auto instr = m.NewInstr("D_PERF_LUT_LO_HIT_group0");
             instr.SetDecode((csb_addr == 0xb0f8) & csb_valid & csb_write &
-                            (producer == BvConst(0, 1)) & group0_unset);
+                            (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
@@ -1338,7 +1338,7 @@ namespace ilang
         { // 00f8_group1
             auto instr = m.NewInstr("D_PERF_LUT_LO_HIT_group1");
             instr.SetDecode((csb_addr == 0xb0f8) & csb_valid & csb_write &
-                            (producer == BvConst(1, 1)) & group1_unset);
+                            (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
                             Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
