@@ -16,7 +16,7 @@ sc_biguint<1> local_var_17 = 1;
 bool local_var_18 = (local_var_16 == local_var_17);
 bool local_var_19 = (local_var_14 & local_var_18);
 auto local_var_21 = sdp_group1_d_op_en.range(0, 0);
-sc_biguint<1> local_var_22 = 0;
+sc_biguint<1> local_var_22 = 1;
 bool local_var_23 = (local_var_21 == local_var_22);
 bool local_var_24 = (local_var_19 & local_var_23);
 auto& univ_var_17 = local_var_24;

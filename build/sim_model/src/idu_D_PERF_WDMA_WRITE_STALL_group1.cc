@@ -16,14 +16,14 @@ sc_biguint<1> local_var_17 = 1;
 bool local_var_18 = (local_var_16 == local_var_17);
 bool local_var_19 = (local_var_14 & local_var_18);
 auto local_var_21 = sdp_group1_d_op_en.range(0, 0);
-sc_biguint<1> local_var_22 = 0;
+sc_biguint<1> local_var_22 = 1;
 bool local_var_23 = (local_var_21 == local_var_22);
 bool local_var_24 = (local_var_19 & local_var_23);
 auto& univ_var_86 = local_var_24;
 return univ_var_86;
 }
 void sdp::update_sdp_D_PERF_WDMA_WRITE_STALL_group1() {
-auto local_var_1 = sdp_csb_data.range(32, 0);
+auto local_var_1 = sdp_csb_data.range(31, 0);
 auto local_var_1_nxt_holder = local_var_1;
 sdp_group1_d_wdma_stall = local_var_1_nxt_holder;
 #ifdef ILATOR_VERBOSE
