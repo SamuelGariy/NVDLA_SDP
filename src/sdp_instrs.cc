@@ -1109,7 +1109,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH-1, 0));
         }
 
         { // 00cc_group1
@@ -1118,7 +1118,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_WIDTH-1, 0));
         }
 
         // SDP_D_STATUS_NAN_INPUT_NUM
@@ -1128,7 +1128,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH -1, 0));
         }
 
         { // 00do_group1
@@ -1137,7 +1137,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_INPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_INPUT_NUM_WIDTH-1, 0));
         }
 
         // SDP_D_STATUS_INF_INPUT_NUM
@@ -1147,7 +1147,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH-1, 0));
         }
 
         { // 00d4_group1
@@ -1156,7 +1156,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_INF_INPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_INF_INPUT_NUM_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM
@@ -1166,7 +1166,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH-1, 0));
         }
 
         { // 00d8_group1
@@ -1175,7 +1175,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_STATUS_NAN_OUTPUT_NUM_WIDTH-1, 0));
         }
 
         // PERF ENABLE
@@ -1218,7 +1218,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH-1, 0));
         }
 
         { // 00e0_group1
@@ -1227,7 +1227,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_WDMA_WRITE_STALL)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_WDMA_WRITE_STALL_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_LUT_UFLOW
@@ -1237,7 +1237,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH-1, 0));
         }
 
         { // 00e4_group1
@@ -1246,7 +1246,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_UFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_ZERO_PADDING_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_LUT_OFLOW
@@ -1256,7 +1256,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH-1, 0));
         }
 
         { // 00e8_group1
@@ -1265,7 +1265,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_OFLOW)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_OFLOW_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_OUT_SATURATION
@@ -1275,7 +1275,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH-1, 0));
         }
 
         { // 00ec_group1
@@ -1284,7 +1284,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_OUT_SATURATION)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_OUT_SATURATION_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_LUT_HYBRID
@@ -1294,7 +1294,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH-1, 0));
         }
 
         { // 00f0_group1
@@ -1303,7 +1303,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_HYBRID)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_HYBRID_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_LUT_LE_HIT
@@ -1313,7 +1313,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH-1, 0));
         }
 
         { // 00f4_group1
@@ -1322,7 +1322,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LE_HIT)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LE_HIT_WIDTH-1, 0));
         }
 
         // NVDLA_SDP_D_PERF_LUT_LO_HIT
@@ -1332,7 +1332,7 @@ namespace ilang
                             (producer == BvConst(0, 1)) & group0_set);
 
             instr.SetUpdate(m.state(GetVarName("group0_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH-1, 0));
         }
 
         { // 00f8_group1
@@ -1341,7 +1341,7 @@ namespace ilang
                             (producer == BvConst(1, 1)) & group1_set);
 
             instr.SetUpdate(m.state(GetVarName("group1_", NVDLA_SDP_D_PERF_LUT_LO_HIT)),
-                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH, 0));
+                            Extract(m.input("csb_data"), NVDLA_SDP_D_PERF_LUT_LO_HIT_WIDTH-1, 0));
         }
 
         // Receive DONE interrupt
